@@ -17,7 +17,16 @@ pipeline {
                 }
             }
         }
-
+        stage('Load to Minikube') {
+            steps {
+                sh '''
+                    minikube image load yuje123/my-fastapi:latest
+                    minikube image load yuje123/my-nextjs:latest
+                    minikube image load yuje123/my-spring:latest
+                    minikube image load yuje123/my-postgres:latest
+                '''
+            }
+        }
         stage('Push to DockerHub') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', passwordVariable: 'DOCKER_PSW', usernameVariable: 'DOCKER_USR')]) {
