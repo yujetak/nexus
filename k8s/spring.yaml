@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spring
+  template:
+    metadata:
+      labels:
+        app: spring
+    spec:
+      containers:
+        - name: spring
+          image: yuje123/my-spring
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - configMapRef:
+                name: nexus-config
+            - secretRef:
+                name: nexus-secret
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: spring
+spec:
+  type: NodePort
+  selector:
+    app: spring
+  ports:
+    - port: 8080
+      targetPort: 8080
+      nodePort: 30001

@@ -1,0 +1,22 @@
+# Local Database Configuration (PostgreSQL)
+# Copy this file to application-local.properties and fill in your details
+
+spring.datasource.url=jdbc:postgresql://localhost:5432/nexus_db
+spring.datasource.username=human2team
+# Password found in docker-compose.yml (e.g., human2team)
+spring.datasource.password=human2team
+spring.datasource.driver-class-name=org.postgresql.Driver
+
+# JPA Configuration
+spring.jpa.hibernate.ddl-auto=none
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.format_sql=true
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+
+# SQL Parameter Logging
+logging.level.org.hibernate.orm.jdbc.bind=trace
+
+# Payment Configuration
+toss.client-key=your_toss_client_key
+kakao.pay.client-id=TC0ONETIME
+
