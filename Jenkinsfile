@@ -21,7 +21,7 @@ pipeline {
         stage('Push to DockerHub') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', passwordVariable: 'DOCKER_PSW', usernameVariable: 'DOCKER_USR')]) {
-                    sh "echo ${DOCKER_PSW} | docker login -u ${DOCKER_USR} --password-stdin"
+                    sh 'echo ${DOCKER_PSW} | docker login -u ${DOCKER_USR} --password-stdin'
                     sh 'docker push yuje123/my-fastapi'
                     sh 'docker push yuje123/my-spring'
                     sh 'docker push yuje123/my-nextjs'
