@@ -1,6 +1,6 @@
 pipeline {
     agent any
-
+    
     stages {
         stage('Checkout') {
             steps {
@@ -20,7 +20,6 @@ pipeline {
 
         stage('Push to DockerHub') {
             steps {
-                // 이 블록 안에서만 자격 증명을 꺼내 씁니다.
                 withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', passwordVariable: 'DOCKER_PSW', usernameVariable: 'DOCKER_USR')]) {
                     sh "echo ${DOCKER_PSW} | docker login -u ${DOCKER_USR} --password-stdin"
                     sh 'docker push yuje123/my-fastapi'
